@@ -1,0 +1,12 @@
+#!/system/bin/sh
+#
+# configure multitouch
+
+# Max number of fingers
+MAX_TOUCH=`getprop persist.sys.multitouch`
+if [ -z "$MAX_TOUCH" ]; then
+    MAX_TOUCH=2
+fi
+
+# set touchnum
+echo $MAX_TOUCH > /proc/multitouch/num
