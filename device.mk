@@ -21,7 +21,7 @@
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
-ifeq ($(TARGET_PRODUCT),$(filter $(TARGET_PRODUCT),cm_mb525 cm_mb526))
+ifeq ($(TARGET_PRODUCT),$(filter $(TARGET_PRODUCT),mk_jordan mk_jordanplus))
 $(call inherit-product, vendor/motorola/jordan-common/jordan-vendor.mk)
 endif
 
@@ -46,7 +46,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-DEVICE_PACKAGE_OVERLAYS += device/moto/jordan-common/overlay
+DEVICE_PACKAGE_OVERLAYS += device/motorola/jordan-common/overlay
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -103,8 +103,8 @@ PRODUCT_PACKAGES += Torch HwaSettings make_ext4fs
 PRODUCT_PACKAGES += libnl_2 iw
 
 # Blobs and bootmenu stuff
-$(call inherit-product, device/moto/jordan-common/jordan-blobs.mk)
-$(call inherit-product, device/moto/jordan-common/bootmenu/bootmenu.mk)
+$(call inherit-product, device/motorola/jordan-common/jordan-blobs.mk)
+$(call inherit-product, device/motorola/jordan-common/bootmenu/bootmenu.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 
 # Should be after the full_base include, which loads languages_full

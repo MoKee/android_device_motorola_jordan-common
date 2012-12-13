@@ -74,7 +74,7 @@ BOARD_HOSTAPD_TIAP_ROOT     := system/wlan/ti/WiLink_AP
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-TARGET_CUSTOM_BLUEDROID := ../../../device/moto/jordan-common/bluedroid.c
+TARGET_CUSTOM_BLUEDROID := ../../../device/motorola/jordan-common/bluedroid.c
 
 # Usb Specific
 BOARD_MASS_STORAGE_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
@@ -112,7 +112,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_SMALL_RECOVERY := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_NEVER_UMOUNT_SYSTEM := true
-BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/moto/jordan-common/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/motorola/jordan-common/recovery_keys.c
 #TARGET_RECOVERY_UI_LIB := librecovery_ui_generic
 #TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_generic
 TARGET_RECOVERY_PRE_COMMAND := "/system/bootmenu/script/reboot_command.sh"
@@ -120,7 +120,7 @@ TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 
 # Egl Specific
 USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/moto/jordan-common/egl.cfg
+BOARD_EGL_CFG := device/motorola/jordan-common/egl.cfg
 BOARD_USE_YUV422I_DEFAULT_COLORFORMAT := true
 ENABLE_WEBGL := true
 COMMON_GLOBAL_CFLAGS += -DSYSTEMUI_PBSIZE_HACK=1
@@ -161,17 +161,17 @@ ext_modules:
 hboot:
 	mkdir -p $(PRODUCT_OUT)/system/bootmenu/2nd-boot   
 	echo "$(BOARD_KERNEL_CMDLINE)" > $(PRODUCT_OUT)/system/bootmenu/2nd-boot/cmdline  
-	$(API_MAKE) -C $(ANDROID_BUILD_TOP)/device/moto/jordan-common/hboot
-	mv $(ANDROID_BUILD_TOP)/device/moto/jordan-common/hboot/hboot.bin $(PRODUCT_OUT)/system/bootmenu/2nd-boot/
-	make clean -C $(ANDROID_BUILD_TOP)/device/moto/jordan-common/hboot
+	$(API_MAKE) -C $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot
+	mv $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot/hboot.bin $(PRODUCT_OUT)/system/bootmenu/2nd-boot/
+	make clean -C $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot
 
 # If kernel sources are present in repo, here is the location
 TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/jordan-kernel
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.5.4-linaro
 TARGET_KERNEL_CONFIG  := mapphone_defconfig
 BOARD_KERNEL_CMDLINE := console=/dev/null mem=498M init=/init ip=off brdrev=P3A omapfb.vram=0:4M
-#TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/moto/jordan-common/kernel
+#TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/kernel
 # Extra : external modules sources
-TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/moto/jordan-common/modules/sources/
+TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/modules/sources/
 TARGET_KERNEL_MODULES := ext_modules hboot
 

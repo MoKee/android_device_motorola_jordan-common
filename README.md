@@ -11,7 +11,7 @@ Build:
 ======
 cd vendor/cm && ./get-prebuilts
 
-copy /device/moto/jordan-common/apply_linaro.sh to root of tree and run it.
+copy /device/motorola/jordan-common/apply_linaro.sh to root of tree and run it.
 
 For CM10 branch :
   source build/envsetup.sh && lunch cm_mb526-userdebug && make -jX bacon
