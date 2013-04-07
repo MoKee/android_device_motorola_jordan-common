@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-device_path = device/moto/jordan-common
+device_path = device/motorola/jordan-common
 
 PRODUCT_COPY_FILES += \
 	$(device_path)/prebuilt/etc/terminfo/l/linux:system/etc/terminfo/l/linux \
@@ -70,8 +70,8 @@ PRODUCT_COPY_FILES += \
 	${device_path}/releasetools/addon.d/70-bootmenu.sh:system/addon.d/70-bootmenu.sh \
 
 # copy all others kernel modules under the "modules" directory to system/lib/modules
-PRODUCT_COPY_FILES += $(shell test -d device/moto/jordan-common/modules/prebuilt && \
-	find device/moto/jordan-common/modules/prebuilt -name '*.ko' \
+PRODUCT_COPY_FILES += $(shell test -d device/motorola/jordan-common/modules/prebuilt && \
+	find device/motorola/jordan-common/modules/prebuilt -name '*.ko' \
 	-printf '%p:system/lib/modules/%f ')
 
 #end of jordan-blobs.mk

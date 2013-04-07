@@ -62,8 +62,8 @@ BOARD_HOSTAPD_TIAP_ROOT     := system/wlan/ti/WiLink_AP
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-TARGET_CUSTOM_BLUEDROID := ../../../device/moto/jordan-common/bluedroid.c
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/moto/jordan-common/bluetooth
+TARGET_CUSTOM_BLUEDROID := ../../../device/motorola/jordan-common/bluedroid.c
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/motorola/jordan-common/bluetooth
 BOARD_WPAN_DEVICE := true
 # Usb Specific
 BOARD_MASS_STORAGE_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
@@ -101,7 +101,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_SMALL_RECOVERY := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_NEVER_UMOUNT_SYSTEM := true
-BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/moto/jordan-common/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/motorola/jordan-common/recovery_keys.c
 #TARGET_RECOVERY_UI_LIB := librecovery_ui_generic
 #TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_generic
 TARGET_RECOVERY_PRE_COMMAND := "/system/bootmenu/script/reboot_command.sh"
@@ -109,7 +109,7 @@ TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 
 # Egl Specific
 USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/moto/jordan-common/egl.cfg
+BOARD_EGL_CFG := device/motorola/jordan-common/egl.cfg
 BOARD_USE_YUV422I_DEFAULT_COLORFORMAT := true
 ENABLE_WEBGL := true
 COMMON_GLOBAL_CFLAGS += -DSYSTEMUI_PBSIZE_HACK=1
@@ -128,7 +128,7 @@ BOARD_USES_LEGACY_RIL :=true
 
 # Release tool
 TARGET_PROVIDES_RELEASETOOLS := true
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/moto/jordan-common/releasetools/common_ota_from_target_files
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/motorola/jordan-common/releasetools/common_ota_from_target_files
 
 # adb root
 ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
@@ -153,17 +153,17 @@ WLAN_MODULES:
 hboot:
 	mkdir -p $(PRODUCT_OUT)/system/bootmenu/2nd-boot   
 	echo "$(BOARD_KERNEL_CMDLINE)" > $(PRODUCT_OUT)/system/bootmenu/2nd-boot/cmdline  
-	make -C  $(ANDROID_BUILD_TOP)/device/moto/jordan-common/hboot ARCH=arm CROSS_COMPILE="arm-eabi-"
-	mv $(ANDROID_BUILD_TOP)/device/moto/jordan-common/hboot/hboot.bin $(PRODUCT_OUT)/system/bootmenu/2nd-boot/
-	make clean -C $(ANDROID_BUILD_TOP)/device/moto/jordan-common/hboot
+	make -C  $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot ARCH=arm CROSS_COMPILE="arm-eabi-"
+	mv $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot/hboot.bin $(PRODUCT_OUT)/system/bootmenu/2nd-boot/
+	make clean -C $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot
 
 # If kernel sources are present in repo, here is the location
 TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/jordan-kernel
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 TARGET_KERNEL_CONFIG  := mapphone_defconfig
 BOARD_KERNEL_CMDLINE := console=/dev/null mem=498M init=/init omapfb.vram=0:4M
-#TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/moto/jordan-common/kernel
+#TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/kernel
 # Extra : external modules sources
-TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/moto/jordan-common/modules/sources/
+TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/modules/sources/
 TARGET_KERNEL_MODULES := ext_modules hboot WLAN_MODULES
 
