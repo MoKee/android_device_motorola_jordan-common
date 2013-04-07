@@ -1,5 +1,5 @@
 # Required tools and blobs for bootmenu
-bm_device = device/moto/jordan-common
+bm_device = device/motorola/jordan-common
 
 PRODUCT_PACKAGES += \
 	bootmenu \
