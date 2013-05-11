@@ -66,9 +66,6 @@ TARGET_CUSTOM_BLUEDROID := ../../../device/motorola/jordan-common/bluedroid.c
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/motorola/jordan-common/bluetooth
 BOARD_WPAN_DEVICE := true
 # Usb Specific
-BOARD_MASS_STORAGE_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
-BOARD_MTP_DEVICE := "/dev/mtp"
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 # Build options
@@ -96,22 +93,16 @@ BOARD_DATA_DEVICE   := /dev/block/mmcblk1p25
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := device/motorola/jordan-common/recovery.fstab
-TARGET_RECOVERY_INITRC := device/motorola/jordan-common/profiles/ramdisk/init-recovery.rc
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_USES_MMCUTILS := true
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 DEVICE_RESOLUTION := 480x854
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
-SP1_NAME := "cust"
-SP1_BACKUP_METHOD := files
-SP1_MOUNTABLE := 1
 TW_EXTERNAL_STORAGE_PATH := "/sdcard"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
 TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_FLASH_FROM_STORAGE := true 
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
-BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
 BOARD_USE_CUSTOM_RECOVERY_FONT:= \"roboto_10x18.h\"
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
@@ -121,6 +112,7 @@ TW_NO_REBOOT_BOOTLOADER := true
 TW_ALWAYS_RMRF := true
 TARGET_RECOVERY_PRE_COMMAND := "/system/bootmenu/script/reboot_command.sh"
 TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
+BOARD_UMS_LUNFILE := /sys/class/android_usb/f_mass_storage/lun/file
 
 # Egl Specific
 USE_OPENGL_RENDERER := true
