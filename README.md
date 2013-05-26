@@ -14,7 +14,7 @@ cd vendor/mk && ./get-prebuilts
 copy /device/motorola/jordan-common/apply_linaro.sh to root of tree and run it.
 
 For CM10 branch :
-  source build/envsetup.sh && lunch cm_mb526-userdebug && make -jX bacon
+  source build/envsetup.sh && lunch mk_jordanplus-userdebug && make -jX bacon
 
 Use the signed zip to update the defy with the bootmenu recovery, not the ota package !
 
