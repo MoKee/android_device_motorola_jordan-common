@@ -53,7 +53,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.default_network=3 \
 	mobiledata.interfaces=rmnet0 \
 
-DEVICE_PACKAGE_OVERLAYS += device/moto/jordan-common/overlay
+DEVICE_PACKAGE_OVERLAYS += device/motorola/jordan-common/overlay
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -129,8 +129,8 @@ PRODUCT_COPY_FILES += \
     $(OUT)/utilities/lsof:system/bootmenu/binary/lsof \
 
 # Blobs and bootmenu stuff
-$(call inherit-product, device/moto/jordan-common/jordan-blobs.mk)
-$(call inherit-product, device/moto/jordan-common/bootmenu/bootmenu.mk)
+$(call inherit-product, device/motorola/jordan-common/jordan-blobs.mk)
+$(call inherit-product, device/motorola/jordan-common/bootmenu/bootmenu.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
