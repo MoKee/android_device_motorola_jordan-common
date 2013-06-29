@@ -137,10 +137,4 @@
     <string name="restore_presets_success_toast">备份文件 %1$d 中的频道信息恢复成功</string>
     <string name="restore_presets_failure_toast">恢复频道列表失败</string>
     <string name="select_backup">选择备份文件</string>
-    <string name="exit">退出 FM</string>
-    <string name="by_loudspeaker">扬声器</string>
-    <string name="by_headset">耳机</string>
-    <string name="interface_settings_title">界面</string>
-    <string name="hide_actionbar_summary">在主界面隐藏标题栏</string>
-    <string name="hide_actionbar_title">隐藏标题栏</string>
 </resources>
