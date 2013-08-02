@@ -9,7 +9,7 @@ PRODUCT_PACKAGES += \
 	hbootuser \
 	utility_mke2fs \
 	utility_tune2fs \
-	e2fsck recovery_pigz \
+	e2fsck \
 
 # config
 PRODUCT_COPY_FILES += \
@@ -27,14 +27,14 @@ PRODUCT_COPY_FILES += \
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
-	${bm_device}/profiles/ramdisk/ueventd.rc:root/ueventd.rc \
+	${bm_device}/profiles/ramdisk/ueventd.mapphone_umts.rc:root/ueventd.mapphone_umts.rc \
 	${bm_device}/profiles/ramdisk/init.usb.rc:root/init.usb.rc \
 	${bm_device}/profiles/ramdisk/init.mapphone_umts.rc:root/init.mapphone_umts.rc \
+	${bm_device}/profiles/ramdisk/fstab.mapphone_umts:root/fstab.mapphone_umts \
 
 # scripts
 PRODUCT_COPY_FILES += \
 	${bm_device}/bootmenu/script/2nd-boot.sh:system/bootmenu/script/2nd-boot.sh \
-	${bm_device}/bootmenu/script/2nd-boot-uart.sh:system/bootmenu/script/2nd-boot-uart.sh \
 	${bm_device}/bootmenu/script/adbd.sh:system/bootmenu/script/adbd.sh \
 	${bm_device}/bootmenu/script/bootmode_clean.sh:system/bootmenu/script/bootmode_clean.sh \
 	${bm_device}/bootmenu/script/cdrom.sh:system/bootmenu/script/cdrom.sh \
@@ -73,7 +73,6 @@ PRODUCT_COPY_FILES += \
 
 # recovery
 PRODUCT_COPY_FILES += \
-	${bm_device}/bootmenu/recovery/recovery.fstab:system/etc/recovery.fstab \
 	${bm_device}/bootmenu/recovery/res/keys:system/bootmenu/recovery/res/keys \
 	${bm_device}/bootmenu/recovery/res/images/icon_error.png:system/bootmenu/recovery/res/images/icon_error.png \
 	${bm_device}/bootmenu/recovery/res/images/icon_done.png:system/bootmenu/recovery/res/images/icon_done.png \
@@ -104,5 +103,7 @@ PRODUCT_COPY_FILES += \
 	${bm_device}/bootmenu/recovery/sbin/sdparted:system/bootmenu/recovery/sbin/sdparted \
 	${bm_device}/bootmenu/recovery/sbin/mke2fs:system/bootmenu/recovery/sbin/mke2fs \
 	${bm_device}/bootmenu/recovery/recovery.fstab:system/bootmenu/recovery/recovery.fstab \
+	${bm_device}/profiles/2nd-boot/hboot_recovery.cfg:system/bootmenu/2nd-boot/hboot_recovery.cfg \
+	$(OUT)/ramdisk-recovery.img:system/bootmenu/2nd-boot/ramdisk-recovery \
 
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">硬件加速</string>
+    <string name="hwa_settings_image_content">图片</string>
+    <string name="hwa_settings_hwa_disabled_toast">停用对 %1$s 的硬件加速</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">停用对 %1$s 的硬件加速失败!</string>
+    <string name="hwa_settings_hwa_enabled_toast">启用对 %1$s 的硬件加速</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">启用对 %1$s 的硬件加速失敗!</string>
+    <string name="hwa_settings_search_hint">应用程序名称</string>
+</resources>

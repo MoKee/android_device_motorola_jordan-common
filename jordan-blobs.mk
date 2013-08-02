@@ -14,10 +14,6 @@
 
 device_path = device/motorola/jordan-common
 
-PRODUCT_COPY_FILES += \
-	$(device_path)/prebuilt/etc/terminfo/l/linux:system/etc/terminfo/l/linux \
-	$(device_path)/prebuilt/etc/terminfo/x/xterm:system/etc/terminfo/x/xterm \
-
 # Key layouts, names must fit the ones in /proc/bus/input/devices, qwerty.kl is the fallback one.
 PRODUCT_COPY_FILES += \
 	$(device_path)/prebuilt/usr/idc/internal.idc:system/usr/idc/lm3530_led.idc \
@@ -35,26 +31,31 @@ PRODUCT_COPY_FILES += \
 	$(device_path)/prebuilt/usr/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
 	$(device_path)/prebuilt/usr/keychars/cpcap-key.kcm:system/usr/keychars/cpcap-key.kcm \
 
+# scripts
+PRODUCT_COPY_FILES += \
+	${device_path}/prebuilt/bin/handle_bp_panic.sh:system/bin/handle_bp_panic.sh \
+	${device_path}/prebuilt/bin/wifical.sh:system/bin/wifical.sh \
+
 PRODUCT_COPY_FILES += \
 	${device_path}/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
-	${device_path}/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
-	$(device_path)/prebuilt/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
 	$(device_path)/prebuilt/etc/init.d/02baseband:system/etc/init.d/02baseband \
 	$(device_path)/prebuilt/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
 	$(device_path)/prebuilt/etc/init.d/08backlight:system/etc/init.d/08backlight \
 	$(device_path)/prebuilt/etc/init.d/90multitouch:system/etc/init.d/90multitouch \
-	$(device_path)/prebuilt/etc/profile:system/etc/profile \
 	$(device_path)/prebuilt/etc/sysctl.conf:system/etc/sysctl.conf \
 	$(device_path)/prebuilt/etc/busybox.fstab:system/etc/fstab \
-	$(device_path)/prebuilt/etc/wifi/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
-	$(device_path)/prebuilt/etc/wifi/tiwlan.ini:system/etc/wifi/tiwlan.ini \
-	$(device_path)/prebuilt/etc/wifi/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
-	$(device_path)/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-	$(device_path)/prebuilt/etc/wifi/hostap_wrapper.sh:system/etc/wifi/hostap_wrapper.sh \
 	$(device_path)/prebuilt/etc/gpsconfig.xml:system/etc/gpsconfig.xml \
 	$(device_path)/prebuilt/etc/location.cfg:system/etc/location.cfg \
 	$(device_path)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
 	$(device_path)/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf \
+
+# WLAN/WPAN firmware
+PRODUCT_COPY_FILES += \
+    $(device_path)/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin \
+    $(device_path)/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin \
+    $(device_path)/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin \
+    $(device_path)/prebuilt/etc/firmware/TIInit_7.2.31.bts:system/etc/firmware/TIInit_7.2.31.bts \
+
 
 # New CM9 backup list system (addon.d)
 PRODUCT_COPY_FILES += \
