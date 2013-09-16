@@ -18,12 +18,11 @@
             android:label="@string/app_shortname"
             android:name=".DeviceSettings" >
 
-            <!-- icon in launcher
+            <!-- icon in launcher-->
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
-            -->
 
             <!-- link in settings -->
             <intent-filter>
