@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_shortname" translatable="false">高级设置</string>
     <string name="app_name">Defy设置</string>
 
     <string name="general_settings_title">一般设置</string>
