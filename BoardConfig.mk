@@ -121,8 +121,10 @@ BOARD_EGL_CFG := device/motorola/jordan-common/egl.cfg
 BOARD_USE_YUV422I_DEFAULT_COLORFORMAT := true
 ENABLE_WEBGL := true
 COMMON_GLOBAL_CFLAGS += -DSYSTEMUI_PBSIZE_HACK=1
+COMMON_GLOBAL_CFLAGS += -DWORKAROUND_BUG_10194508=1
 COMMON_GLOBAL_CFLAGS += -DHAS_CONTEXT_PRIORITY -DDONT_USE_FENCE_SYNC
 TARGET_DISABLE_TRIPLE_BUFFERING := true
+TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
 # Camera
 USE_CAMERA_STUB := false
@@ -171,7 +173,7 @@ hboot:
 # If kernel sources are present in repo, here is the location
 TARGET_KERNEL_SOURCE := kernel/motorola/jordan
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
-BOARD_KERNEL_CMDLINE := console=/dev/null mem=498M init=/init omapfb.vram=0:4M
+BOARD_KERNEL_CMDLINE := console=/dev/null mem=500M init=/init omapfb.vram=0:4M
 #TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/kernel
 # Extra : external modules sources
 TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/modules/sources/
