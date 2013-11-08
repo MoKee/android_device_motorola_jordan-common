@@ -29,22 +29,32 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.media.capture.flip=horizontalandvertical \
 	ro.com.google.locationfeatures=1 \
+	ro.media.dec.jpeg.memcap=20000000 \
+	net.dns1=8.8.8.8 \
+	net.dns2=8.8.4.4 \
+	ro.opengles.version = 131072 \
+	persist.sys.usb.config=mass_storage,adb \
+	ro.product.use_charge_counter=1 \
+	hwui.use.blacklist=true \
+	ro.sf.lcd_density=240 \
+	ro.bq.gpu_to_cpu_unsupported=1 \
+	dalvik.vm.debug.alloc=0 \
+	ro.hwui.disable_scissor_opt=true \
+
+# wifi props
+PRODUCT_PROPERTY_OVERRIDES += \
+	wifi.interface=wlan0 \
+	softap.interface=wlan0 \
+	wifi.supplicant_scan_interval=60 \
+
+# telephony props
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.telephony.ril.v3=signalstrength \
+	ro.telephony.ril_class=MotoWrigley3GRIL \
 	ro.telephony.call_ring.multiple=false \
 	ro.telephony.call_ring.delay=3000 \
-	ro.media.dec.jpeg.memcap=20000000 \
-	dalvik.vm.lockprof.threshold=500 \
-	ro.kernel.android.checkjni=0 \
-	dalvik.vm.checkjni=false \
-	dalvik.vm.dexopt-data-only=1 \
-	dalvik.vm.heaptargetutilization=0.75 \
-	dalvik.vm.heapminfree=512k \
-	dalvik.vm.heapmaxfree=2m
-	ro.vold.umsdirtyratio=20 \
-	net.dns1=8.8.8.8 \
-	net.dns2=8.8.4.4
-
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
+	ro.telephony.default_network=3 \
+	mobiledata.interfaces=rmnet0 \
 
 DEVICE_PACKAGE_OVERLAYS += device/motorola/jordan-common/overlay
 
@@ -55,6 +65,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
 	frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
 	frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
@@ -62,9 +73,13 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
 	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml \
+	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
+
+PRODUCT_PACKAGES += \
+	com.android.future.usb.accessory
 
 # FIXME in repo 
-PRODUCT_PACKAGES += rild
+PRODUCT_PACKAGES += rild Dialer
 
 # ICS sound
 PRODUCT_PACKAGES += \
@@ -72,23 +87,23 @@ PRODUCT_PACKAGES += \
 	libaudioutils audio.a2dp.default  \
 	libaudiohw_legacy \
 
+# legacy version of skia
+# fixes the app switcher previews
+PRODUCT_PACKAGES += \
+    libskia_legacy
+
 # TO FIX for ICS
 PRODUCT_PACKAGES += power.omap3
 
-# Wifi packages
-PRODUCT_PACKAGES += iwmulticall hostap wlan_loader wlan_cu wpa_supplicant
-PRODUCT_PACKAGES += libhostapdcli libCustomWifi libwpa_client libtiOsLib
-PRODUCT_PACKAGES += tiap_loader tiap_cu ndc hostapd.conf
-
 # OMX stuff
-PRODUCT_PACKAGES += dspexec libbridge libLCML libOMX_Core
+PRODUCT_PACKAGES += dspexec libbridge libLCML libOMX_Core libstagefrighthw
 PRODUCT_PACKAGES += libOMX.TI.AAC.encode libOMX.TI.AAC.decode libOMX.TI.AMR.decode libOMX.TI.AMR.encode
 PRODUCT_PACKAGES += libOMX.TI.WBAMR.encode libOMX.TI.MP3.decode libOMX.TI.WBAMR.decode
 PRODUCT_PACKAGES += libOMX.TI.Video.Decoder libOMX.TI.Video.encoder
-PRODUCT_PACKAGES += libOMX.TI.JPEG.Encoder #libskiahw libOMX.TI.JPEG.decoder
+PRODUCT_PACKAGES += libOMX.TI.JPEG.Encoder
 
 # Defy stuff
-PRODUCT_PACKAGES += libfnc DefyParts Usb MotoFM MotoFMService
+PRODUCT_PACKAGES += libfnc DefyParts MotoFM MotoFMService
 
 # Core stuff
 PRODUCT_PACKAGES += charge_only_mode mot_boot_mode
@@ -97,15 +112,38 @@ PRODUCT_PACKAGES += charge_only_mode mot_boot_mode
 PRODUCT_PACKAGES += librs_jni
 
 # CM9 apps
-PRODUCT_PACKAGES += Torch HwaSettings make_ext4fs
+PRODUCT_PACKAGES += Torch make_ext4fs
 
 # Experimental TI OpenLink
-PRODUCT_PACKAGES += libnl_2 iw
+PRODUCT_PACKAGES += libnl_2 iw libbt-vendor uim-sysfs
+
+# Wifi
+PRODUCT_PACKAGES += \
+    lib_driver_cmd_wl12xx \
+    dhcpcd.conf \
+    hostapd.conf \
+    wpa_supplicant.conf \
+    TQS_D_1.7.ini \
+    TQS_D_1.7_127x.ini \
+    crda \
+    regulatory.bin \
+    calibrator 
+
+# Wifi Direct and WPAN
+PRODUCT_PACKAGES += \
+    ti_wfd_libs \
+    ti-wpan-fw
+
+PRODUCT_COPY_FILES += \
+    $(OUT)/ramdisk.img:system/bootmenu/2nd-boot/ramdisk \
+    $(OUT)/kernel:system/bootmenu/2nd-boot/zImage \
+    $(OUT)/utilities/lsof:system/bootmenu/binary/lsof \
 
 # Blobs and bootmenu stuff
 $(call inherit-product, device/motorola/jordan-common/jordan-blobs.mk)
 $(call inherit-product, device/motorola/jordan-common/bootmenu/bootmenu.mk)
 $(call inherit-product, build/target/product/full_base.mk)
+$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 # Should be after the full_base include, which loads languages_full
 PRODUCT_LOCALES += hdpi

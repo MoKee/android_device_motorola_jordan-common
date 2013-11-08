@@ -56,7 +56,7 @@
         <item>"mobile_dun,4,0,3,60000,true"</item>
         <item>"mobile_hipri,5,0,4,60000,true"</item>
         <item>"mobile_bluetooth,7,7,1,-1,true"</item>
-        <item>"wifi_p2p,13,1,0,-1,false"</item>
+        <item>"wifi_p2p,13,1,0,-1,true"</item>
      </string-array>
 
     <!-- This string array should be overridden by the device to present a list of radio
@@ -91,21 +91,21 @@
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
     <string-array translatable="false" name="config_tether_usb_regexs">
-      <item>usb1</item>
+      <item>"rndis0"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
-        <item>tiap0</item>
+        <item>"wlan0"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          bluetooth interfaces.  If the device doesn't want to support tethering over bluetooth this
          should be empty. -->
     <string-array translatable="false" name="config_tether_bluetooth_regexs">
-        <item>bnep\\d</item>
+        <item>"bt-pan"</item>
     </string-array>
 
     <!-- Max number of Bluetooth tethering connections allowed. If this is
@@ -253,8 +253,8 @@
     <integer name="config_lightSensorWarmupTime">500</integer>
 
     <!-- Flag indicating whether the button and keyboard backlights need the light
-         sensor always enabled. -->
-    <bool name="config_alwaysEnableLightSensor">true</bool>
+         sensor always enabled.
+    <bool name="config_alwaysEnableLightSensor">true</bool>  -->
 
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface">rmnet0</string>
@@ -263,26 +263,20 @@
     <string name="config_legacyUmsLunFile">/sys/devices/platform/usb_mass_storage/lun0/file</string>
 
     <!-- Boolean indicating if current platform supports quick switch-on/off of
-         Bluetooth Module -->
-    <bool name="config_bluetooth_adapter_quick_switch">false</bool>
+         Bluetooth Module 
+    <bool name="config_bluetooth_adapter_quick_switch">false</bool>  --> 
 
     <bool name="config_fmSeparateVolumeControl">true</bool>
 
     <!-- Possible names from /devices/virtual/switch/dock for a dock device.
-Some kernels use names like CAR and DESK. -->
+Some kernels use names like CAR and DESK. 
     <string-array translatable="false" name="config_accessoryDockNames">
         <item>"CAR"</item>
         <item>"DESK"</item>
-    </string-array>
+    </string-array> -->
 
     <!-- If this is true, the screen will fade off. -->
     <bool name="config_animateScreenLights">false</bool>
-
-    <!-- Boolean indicating whether the wifi chipset supports background scanning mechanism.
-         This mechanism allows the host to remain in suspend state and the dongle to actively
-         scan and wake the host when a configured SSID is detected by the dongle. This chipset
-         capability can provide power savings when wifi needs to be always kept on. -->
-    <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
 
     <!-- Enables or disables fading edges when marquee is enabled in TextView. -->
     <bool name="config_ui_enableFadingMarquee">true</bool>
@@ -290,8 +284,28 @@ Some kernels use names like CAR and DESK. -->
     <!-- Minimum screen brightness allowed by the power manager. -->
     <integer name="config_screenBrightnessDim">2</integer>
 
-    <!-- Boolean indicating if restoring network selection should be skipped -->
-    <!-- The restoring is handled by modem if it is true-->
-    <bool name="skip_restoring_network_selection">true</bool>
+    <!-- We dont have different firmware for wifi modes, prevent reloading it -->
+    <bool name="config_wifiApFirmwareReload">false</bool>
 
+    <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
+    <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
+
+    <!-- Boolean indicating whether the wifi chipset has background scan support -->
+    <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
+
+    <string-array name="config_locationProviderPackageNames" translatable="false">
+        <!-- The standard AOSP fused location provider -->
+        <item>com.android.location.fused</item>
+        <!-- The Google Network Location Services location provider -->
+        <item>com.google.android.location</item>
+    </string-array>
+
+    <!--
+    Minimum screen brightness setting allowed by the power manager.
+    The user is forbidden from setting the brightness below this level. 
+    -->
+    <integer name="config_screenBrightnessSettingMinimum">2</integer>
+
+    <!-- Device supports LED flashlight -->
+    <bool name="config_enableTorch">true</bool>
 </resources>

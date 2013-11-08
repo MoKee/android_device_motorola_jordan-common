@@ -1,4 +1,4 @@
-# Copyright (C) 2009 The Android Open Source Project
+# Copyright (C) 2013 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,8 +24,6 @@
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 
-# Model variant (DEFY_FROYO, DEFY_GINGER, DEFY_PLUS)
-
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_PREINSTALL := true
@@ -33,59 +31,47 @@ TARGET_NO_PREINSTALL := true
 TARGET_BOOTLOADER_BOARD_NAME := jordan
 
 # Board properties
+TARGET_ARCH := arm
 TARGET_BOARD_PLATFORM := omap3
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a8
+TARGET_CPU_VARIANT := cortex-a8
 TARGET_ARCH_VARIANT_FPU := neon
 TARGET_OMAP3 := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
-COMMON_GLOBAL_CFLAGS += -DTARGET_OMAP3 -DOMAP_COMPAT -DBINDER_COMPAT
+COMMON_GLOBAL_CFLAGS += -DTARGET_OMAP3 -DOMAP_COMPAT -DBINDER_COMPAT -DUSES_AUDIO_LEGACY
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
 
+# Conserve memory in the Dalvik heap
+# Details: https://github.com/CyanogenMod/android_dalvik/commit/15726c81059b74bf2352db29a3decfc4ea9c1428
+TARGET_ARCH_LOWMEM := true
+
 # Wifi related defines
-BOARD_WLAN_DEVICE           := wl1271
-WPA_SUPPLICANT_VERSION      := VER_0_6_X
-BOARD_WPA_SUPPLICANT_DRIVER := CUSTOM
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/tiwlan_drv.ko"
-WIFI_DRIVER_MODULE_NAME     := tiwlan_drv
-WIFI_DRIVER_FW_STA_PATH     := "/system/etc/wifi/fw_wlan1271.bin"
-WIFI_FIRMWARE_LOADER        := wlan_loader
-PRODUCT_WIRELESS_TOOLS      := true
-BOARD_SOFTAP_DEVICE         := wl1271
-AP_CONFIG_DRIVER_WILINK     := true
-AP_CONFIG_IEEE80211N        := true
-WIFI_DRIVER_FW_AP_PATH      := "/system/etc/wifi/fw_tiwlan_ap.bin"
-WPA_SUPPL_APPROX_USE_RSSI   := true
-WPA_SUPPL_WITH_SIGNAL_POLL  := false
-USES_TI_MAC80211            := true
-# CM9
-WIFI_DRIVER_LOADER_DELAY    := 200000
-WIFI_AP_DRIVER_MODULE_PATH  := "/system/lib/modules/tiap_drv.ko"
-WIFI_AP_DRIVER_MODULE_NAME  := tiap_drv
-WIFI_AP_FIRMWARE_LOADER     := wlan_ap_loader
-WIFI_AP_DRIVER_MODULE_ARG   := ""
-BOARD_HOSTAPD_NO_ENTROPY    := true
-BOARD_HOSTAPD_DRIVER        := true
-BOARD_HOSTAPD_DRIVER_NAME   := wilink
+USES_TI_MAC80211 := true
+WPA_SUPPLICANT_VERSION           := VER_0_8_X_TI
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_wl12xx
+PRODUCT_WIRELESS_TOOLS           := true
+BOARD_WLAN_DEVICE                := wl12xx_mac80211
+BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx_sdio.ko"
+WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
+WIFI_FIRMWARE_LOADER             := ""
+COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
 BOARD_HOSTAPD_TIAP_ROOT     := system/wlan/ti/WiLink_AP
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 TARGET_CUSTOM_BLUEDROID := ../../../device/motorola/jordan-common/bluedroid.c
-
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/motorola/jordan-common/bluetooth
+BOARD_WPAN_DEVICE := true
 # Usb Specific
-BOARD_MASS_STORAGE_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
-BOARD_MTP_DEVICE := "/dev/mtp"
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-
-# Build options
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 1330343936
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 325000000
-BOARD_FLASH_BLOCK_SIZE := 131072
 
 # OMX Stuff
 HARDWARE_OMX := true
@@ -105,18 +91,29 @@ BOARD_SYSTEM_DEVICE := /dev/block/mmcblk1p21
 BOARD_DATA_DEVICE   := /dev/block/mmcblk1p25
 
 # Recovery
-TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
-BOARD_RECOVERY_IGNORE_BOOTABLES := true
-BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_HAS_SMALL_RECOVERY := true
+TARGET_RECOVERY_FSTAB := device/motorola/jordan-common/recovery.fstab
+TARGET_RECOVERY_INITRC := device/motorola/jordan-common/profiles/ramdisk/init-recovery.rc
 BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_NEVER_UMOUNT_SYSTEM := true
-BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/motorola/jordan-common/recovery_keys.c
-#TARGET_RECOVERY_UI_LIB := librecovery_ui_generic
-#TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_generic
+BOARD_HAS_NO_MISC_PARTITION := true
+BOARD_USES_MMCUTILS := true
+TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
+DEVICE_RESOLUTION := 480x854
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_EXTERNAL_STORAGE_PATH := "/sdcard"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_FLASH_FROM_STORAGE := true 
+BOARD_USE_CUSTOM_RECOVERY_FONT:= \"roboto_10x18.h\"
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+TW_MAX_BRIGHTNESS := 255
+TW_NO_BATT_PERCENT := true
+TW_NO_REBOOT_RECOVERY := true
+TW_NO_REBOOT_BOOTLOADER := true
+TW_ALWAYS_RMRF := true
 TARGET_RECOVERY_PRE_COMMAND := "/system/bootmenu/script/reboot_command.sh"
 TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
+BOARD_UMS_LUNFILE := /sys/class/android_usb/f_mass_storage/lun/file
 
 # Egl Specific
 USE_OPENGL_RENDERER := true
@@ -124,6 +121,8 @@ BOARD_EGL_CFG := device/motorola/jordan-common/egl.cfg
 BOARD_USE_YUV422I_DEFAULT_COLORFORMAT := true
 ENABLE_WEBGL := true
 COMMON_GLOBAL_CFLAGS += -DSYSTEMUI_PBSIZE_HACK=1
+COMMON_GLOBAL_CFLAGS += -DHAS_CONTEXT_PRIORITY -DDONT_USE_FENCE_SYNC
+TARGET_DISABLE_TRIPLE_BUFFERING := true
 
 # Camera
 USE_CAMERA_STUB := false
@@ -134,44 +133,47 @@ BOARD_USES_AUDIO_LEGACY := true
 TARGET_PROVIDES_LIBAUDIO := true
 BOARD_USE_KINETO_COMPATIBILITY := true
 TARGET_BOOTANIMATION_USE_RGB565 := true
+BOARD_USE_HARDCODED_FAST_TRACK_LATENCY_WHEN_DENIED := 160
+BOARD_USES_LEGACY_RIL :=true
+BOARD_USE_LEGACY_SENSORS_FUSION := false
+BOARD_HARDWARE_CLASS := device/motorola/jordan-common/cmhw/
 
-##### Kernel stuff #####
-TARGET_MODULES_WIFI_SOURCE := "system/wlan/ti/wilink_6_1/platforms/os/linux/"
-TARGET_MODULES_AP_SOURCE := "system/wlan/ti/WiLink_AP/platforms/os/linux/"
+# Release tool
+TARGET_PROVIDES_RELEASETOOLS := true
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/motorola/jordan-common/releasetools/common_ota_from_target_files
 
-API_MAKE := \
-	make PREFIX=$(ANDROID_BUILD_TOP)/$(TARGET_OUT_INTERMEDIATES)/kernel_intermediates/build \
-	ARCH=arm \
-	CROSS_COMPILE=$(ANDROID_BUILD_TOP)/prebuilt/$(HOST_PREBUILT_TAG)/toolchain/arm-eabi-4.5.4-linaro/bin/arm-eabi- \
-	HOST_PLATFORM=zoom2 \
-	KERNEL_DIR=$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ \
+# adb root
+ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
+ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
 
 ext_modules:
-	$(API_MAKE) -C $(TARGET_KERNEL_MODULES_EXT) modules
+	make -C $(TARGET_KERNEL_MODULES_EXT) modules KERNEL_DIR=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE="arm-eabi-"
 	find $(TARGET_KERNEL_MODULES_EXT)/ -name "*.ko" -exec mv {} \
 		$(KERNEL_MODULES_OUT) \; || true
-	$(API_MAKE) clean -C $(TARGET_MODULES_WIFI_SOURCE)
-	$(API_MAKE) clean -C $(TARGET_MODULES_AP_SOURCE)
-	$(API_MAKE) -C $(TARGET_MODULES_WIFI_SOURCE) HOST_PLATFORM=zoom2 KERNEL_DIR=$(KERNEL_OUT)
-	$(API_MAKE) -C $(TARGET_MODULES_AP_SOURCE) HOST_PLATFORM=zoom2 KERNEL_DIR=$(KERNEL_OUT)
-	mv $(TARGET_MODULES_WIFI_SOURCE)/tiwlan_drv.ko $(KERNEL_MODULES_OUT)
-	mv $(TARGET_MODULES_AP_SOURCE)/tiap_drv.ko $(KERNEL_MODULES_OUT)
-	arm-linux-androideabi-strip --strip-unneeded $(KERNEL_MODULES_OUT)/*
 
+WLAN_MODULES:
+	make clean -C hardware/ti/wlan/mac80211/compat_wl12xx
+	make -C hardware/ti/wlan/mac80211/compat_wl12xx KERNEL_DIR=$(KERNEL_OUT) KLIB=$(KERNEL_OUT) KLIB_BUILD=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE="arm-eabi-"
+	mv hardware/ti/wlan/mac80211/compat_wl12xx/compat/compat.ko $(KERNEL_MODULES_OUT)
+	mv hardware/ti/wlan/mac80211/compat_wl12xx/net/mac80211/mac80211.ko $(KERNEL_MODULES_OUT)
+	mv hardware/ti/wlan/mac80211/compat_wl12xx/net/wireless/cfg80211.ko $(KERNEL_MODULES_OUT)
+	mv hardware/ti/wlan/mac80211/compat_wl12xx/drivers/net/wireless/wl12xx/wl12xx.ko $(KERNEL_MODULES_OUT)
+	mv hardware/ti/wlan/mac80211/compat_wl12xx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko $(KERNEL_MODULES_OUT)
+	arm-linux-androideabi-strip --strip-unneeded $(KERNEL_MODULES_OUT)/*
 hboot:
 	mkdir -p $(PRODUCT_OUT)/system/bootmenu/2nd-boot   
 	echo "$(BOARD_KERNEL_CMDLINE)" > $(PRODUCT_OUT)/system/bootmenu/2nd-boot/cmdline  
-	$(API_MAKE) -C $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot
+	make -C  $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot ARCH=arm CROSS_COMPILE="arm-eabi-"
 	mv $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot/hboot.bin $(PRODUCT_OUT)/system/bootmenu/2nd-boot/
 	make clean -C $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot
 
 # If kernel sources are present in repo, here is the location
-TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/motorola/jordan
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.5.4-linaro
-TARGET_KERNEL_CONFIG  := mapphone_defconfig
-BOARD_KERNEL_CMDLINE := console=/dev/null mem=498M init=/init ip=off brdrev=P3A omapfb.vram=0:4M
+TARGET_KERNEL_SOURCE := kernel/motorola/jordan
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
+BOARD_KERNEL_CMDLINE := console=/dev/null mem=498M init=/init omapfb.vram=0:4M
 #TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/kernel
 # Extra : external modules sources
 TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/modules/sources/
-TARGET_KERNEL_MODULES := ext_modules hboot
+TARGET_KERNEL_MODULES := ext_modules hboot WLAN_MODULES
 

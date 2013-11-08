@@ -18,6 +18,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 #define LOG_TAG "OMAP3 PowerHAL"
 #include <utils/Log.h>
@@ -210,6 +211,8 @@ static void omap3_power_hint(struct power_module *module, power_hint_t hint,
 	    if (len < 0) {
 	        strerror_r(errno, buf, sizeof(buf));
 		ALOGE("Error writing to %s: %s\n", BOOSTPULSE_PATH, buf);
+		close(omap3->boostpulse_fd);
+		omap3->boostpulse_fd=-1;
 	    }
 	}
         break;
