@@ -56,6 +56,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.default_network=3 \
 	mobiledata.interfaces=rmnet0 \
 
+PRODUCT_PROPERTY_OVERRIDES += \
+  ro.config.low_ram=true  \
+  dalvik.vm.jit.codecachesize=0 \
+
 DEVICE_PACKAGE_OVERLAYS += device/motorola/jordan-common/overlay
 
 # Permissions
