@@ -17,5 +17,8 @@
 <!-- Phone app resources that may need to be customized
      for different hardware or product builds. -->
 <resources>
-   <string name="voice_quality_param">motoVoiceQualityConfig</string>
+    <!--  <string name="voice_quality_param">motoVoiceQualityConfig</string>  -->
+    <!-- Determine whether we want to play local DTMF tones in a call, or
+         just let the radio/BP handle playing of the tones. -->
+    <bool name="allow_local_dtmf_tones">true</bool>
 </resources>
