@@ -178,7 +178,7 @@ hboot:
 	make clean -C $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/hboot
 
 # If kernel sources are present in repo, here is the location
-TARGET_KERNEL_SOURCE := kernel/motorola/jordan
+TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/motorola/jordan
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 BOARD_KERNEL_CMDLINE := console=/dev/null mem=500M init=/init omapfb.vram=0:4M
 #TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/kernel

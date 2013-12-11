@@ -22,8 +22,8 @@
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)	
 # Blobs and bootmenu stuff
-$(call inherit-product, device/moto/jordan-common/jordan-blobs.mk)
-$(call inherit-product, device/moto/jordan-common/bootmenu/bootmenu.mk)
+$(call inherit-product, device/motorola/jordan-common/jordan-blobs.mk)
+$(call inherit-product, device/motorola/jordan-common/bootmenu/bootmenu.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 # Get some sounds
 $(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
@@ -92,8 +92,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
 
-RODUCT_PACKAGES := \
-    VoiceDialer
+RRODUCT_PACKAGES := \
+	VoiceDialer
 
 # ICS sound
 PRODUCT_PACKAGES += \
