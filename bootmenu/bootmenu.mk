@@ -102,6 +102,8 @@ PRODUCT_COPY_FILES += \
 	${bm_device}/bootmenu/recovery/sbin/mke2fs:system/bootmenu/recovery/sbin/mke2fs \
 	${bm_device}/bootmenu/recovery/recovery.fstab:system/bootmenu/recovery/recovery.fstab \
 	${bm_device}/profiles/2nd-boot/hboot_recovery.cfg:system/bootmenu/2nd-boot/hboot_recovery.cfg \
-	$(OUT)/ramdisk-recovery.img:system/bootmenu/2nd-boot/ramdisk-recovery \
 	$(bm_device)/temp/busybox:system/bootmenu/binary/busybox \
 	$(bm_device)/temp/bootmenu:system/bin/bootmenu \
+	$(bm_device)/temp/ramdisk-recovery:system/bootmenu/2nd-boot/ramdisk-recovery
+
+#$(OUT)/ramdisk-recovery.img:system/bootmenu/2nd-boot/ramdisk-recovery
