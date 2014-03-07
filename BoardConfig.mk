@@ -163,22 +163,22 @@ ext_modules:
 		$(KERNEL_MODULES_OUT) \; || true
 
 COMPAT_MODULES:
-	make mrproper -C device/moto/jordan-common/modules/backports
-	make -C device/moto/jordan-common/modules/backports KERNEL_DIR=$(KERNEL_OUT) KLIB=$(KERNEL_OUT) KLIB_BUILD=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE="arm-eabi-" defconfig-mapphone
-	make -C device/moto/jordan-common/modules/backports KERNEL_DIR=$(KERNEL_OUT) KLIB=$(KERNEL_OUT) KLIB_BUILD=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE="arm-eabi-"
-	mv device/moto/jordan-common/modules/backports/compat/compat.ko $(KERNEL_MODULES_OUT)
+	make mrproper -C device/motorola/jordan-common/modules/backports
+	make -C device/motorola/jordan-common/modules/backports KERNEL_DIR=$(KERNEL_OUT) KLIB=$(KERNEL_OUT) KLIB_BUILD=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE="arm-eabi-" defconfig-mapphone
+	make -C device/motorola/jordan-common/modules/backports KERNEL_DIR=$(KERNEL_OUT) KLIB=$(KERNEL_OUT) KLIB_BUILD=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE="arm-eabi-"
+	mv device/motorola/jordan-common/modules/backports/compat/compat.ko $(KERNEL_MODULES_OUT)
 ifeq ($(TARGET_USE_BLUEDROID_STACK),false)
-	mv device/moto/jordan-common/modules/backports/net/bluetooth/bluetooth.ko $(KERNEL_MODULES_OUT)
-	mv device/moto/jordan-common/modules/backports/net/bluetooth/bnep/bnep.ko $(KERNEL_MODULES_OUT)
-	mv device/moto/jordan-common/modules/backports/net/bluetooth/rfcomm/rfcomm.ko $(KERNEL_MODULES_OUT)
-	mv device/moto/jordan-common/modules/backports/drivers/bluetooth/btwilink.ko $(KERNEL_MODULES_OUT)
-	mv device/moto/jordan-common/modules/backports/drivers/bluetooth/hci_uart.ko $(KERNEL_MODULES_OUT)
+	mv device/motorola/jordan-common/modules/backports/net/bluetooth/bluetooth.ko $(KERNEL_MODULES_OUT)
+	mv device/motorola/jordan-common/modules/backports/net/bluetooth/bnep/bnep.ko $(KERNEL_MODULES_OUT)
+	mv device/motorola/jordan-common/modules/backports/net/bluetooth/rfcomm/rfcomm.ko $(KERNEL_MODULES_OUT)
+	mv device/motorola/jordan-common/modules/backports/drivers/bluetooth/btwilink.ko $(KERNEL_MODULES_OUT)
+	mv device/motorola/jordan-common/modules/backports/drivers/bluetooth/hci_uart.ko $(KERNEL_MODULES_OUT)
 endif
-	mv device/moto/jordan-common/modules/backports/net/mac80211/mac80211.ko $(KERNEL_MODULES_OUT)
-	mv device/moto/jordan-common/modules/backports/net/wireless/cfg80211.ko $(KERNEL_MODULES_OUT)
-	mv device/moto/jordan-common/modules/backports/drivers/net/wireless/ti/wlcore/wlcore.ko $(KERNEL_MODULES_OUT)
-	mv device/moto/jordan-common/modules/backports/drivers/net/wireless/ti/wl12xx/wl12xx.ko $(KERNEL_MODULES_OUT)
-	mv device/moto/jordan-common/modules/backports/drivers/net/wireless/ti/wlcore/wlcore_sdio.ko $(KERNEL_MODULES_OUT)
+	mv device/motorola/jordan-common/modules/backports/net/mac80211/mac80211.ko $(KERNEL_MODULES_OUT)
+	mv device/motorola/jordan-common/modules/backports/net/wireless/cfg80211.ko $(KERNEL_MODULES_OUT)
+	mv device/motorola/jordan-common/modules/backports/drivers/net/wireless/ti/wlcore/wlcore.ko $(KERNEL_MODULES_OUT)
+	mv device/motorola/jordan-common/modules/backports/drivers/net/wireless/ti/wl12xx/wl12xx.ko $(KERNEL_MODULES_OUT)
+	mv device/motorola/jordan-common/modules/backports/drivers/net/wireless/ti/wlcore/wlcore_sdio.ko $(KERNEL_MODULES_OUT)
 	arm-linux-androideabi-strip --strip-unneeded $(KERNEL_MODULES_OUT)/*
 
 WLAN_MODULES:
@@ -193,10 +193,10 @@ WLAN_MODULES:
 
 hboot:
 	mkdir -p $(PRODUCT_OUT)/system/bootstrap/2nd-boot   
-	echo "$(BOARD_KERNEL_CMDLINE)" > $(PRODUCT_OUT)/system//bootstrap/2nd-boot/cmdline  
-	make -C  $(ANDROID_BUILD_TOP)/device/moto/jordan-common/hboot ARCH=arm CROSS_COMPILE="arm-eabi-"
+	echo "$(BOARD_KERNEL_CMDLINE)" > $(PRODUCT_OUT)/system/bootstrap/2nd-boot/cmdline  
+	make -C  $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/bootstrap/hboot ARCH=arm CROSS_COMPILE="arm-eabi-"
 	mv $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/bootstrap/hboot/hboot.bin $(PRODUCT_OUT)/system/bootstrap/2nd-boot/
-	make clean -C $(ANDROID_BUILD_TOP)/device/moto/jordan-common/hboot
+	make clean -C $(ANDROID_BUILD_TOP)/device/motorola/jordan-common/bootstrap/hboot
 
 # If kernel sources are present in repo, here is the location
 TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/motorola/jordan

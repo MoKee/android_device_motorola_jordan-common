@@ -1,5 +1,5 @@
 # Required tools and blobs for bootstrap
-bm_device = device/moto/jordan-common
+bm_device = device/motorola/jordan-common
 include $(all-subdir-makefiles)
 
 # Ramdisk
@@ -26,7 +26,6 @@ PRODUCT_COPY_FILES += \
 	${bm_device}/bootstrap/modules/hbootmod.ko:system/bootstrap/modules/hbootmod.ko \
 	${bm_device}/bootstrap/2nd-boot/hboot.cfg:system/bootstrap/2nd-boot/hboot.cfg \
 	${bm_device}/bootstrap/2nd-boot/hboot_recovery.cfg:system/bootstrap/2nd-boot/hboot_recovery.cfg \
-	${bm_device}/bootstrap/2nd-boot/zImage-recovery:system/bootstrap/2nd-boot/zImage-recovery \
 	$(bm_device)/twrp.fstab:recovery/root/etc/twrp.fstab \
 	${bm_device}/bootstrap/modules/jbd2.ko:system/bootstrap/modules/jbd2.ko \
 	${bm_device}/bootstrap/modules/ext4.ko:system/bootstrap/modules/ext4.ko \
