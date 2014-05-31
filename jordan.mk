@@ -18,8 +18,7 @@
 # This is the product configuration for a generic Motorola Defy (jordan)
 #
 # Bootanimation
-TARGET_SCREEN_HEIGHT := 854
-TARGET_SCREEN_WIDTH := 480
+TARGET_BOOTANIMATION_NAME := 480
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/motorola/jordan-common/bootstrap/bootstrap.mk)
