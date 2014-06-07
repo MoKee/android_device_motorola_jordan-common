@@ -120,6 +120,7 @@ TW_HAS_NO_BOOT_PARTITION := true
 TW_NO_SCREEN_TIMEOUT := true
 TARGET_RECOVERY_PRE_COMMAND :=  "echo recovery > /cache/recovery/bootmode.conf; sync; \#"
 TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
+TARGET_NO_SEPARATE_RECOVERY := true
 
 # Egl Specific
 USE_OPENGL_RENDERER := true
